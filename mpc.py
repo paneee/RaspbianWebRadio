@@ -3,6 +3,8 @@ import subprocess
 class Mpc:
     def mpcCommand(self, cmd):
     	p = subprocess.Popen(['mpc'] + cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        # r =  p.stdout.read()
+        # print(r)
     	return p.stdout.read()
 
     def play(self, url):
@@ -19,14 +21,14 @@ class Mpc:
     def addStation(self, url):
         self.mpcCommand(["add", url])
 
-    def volumeDecrease(self):
+    def volumeDown(self):
         self.mpcCommand(["volume", "-1"])
 
-    def volumeIncrease(self):
+    def volumeUp(self):
         self.mpcCommand(["volume", "+1"])
 
-    def volumeDecreaseFast(self):
+    def volumeDownDown(self):
         self.mpcCommand(["volume", "-15"])
 
-    def volumeIncreaseFast(self):
+    def volumeUpUp(self):
         self.mpcCommand(["volume", "+15"])

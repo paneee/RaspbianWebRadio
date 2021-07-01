@@ -7,29 +7,36 @@
     <table class="table t1">
       <thead class="bg-info rounded">
         <tr>
-          <th scope="col" class="text-left">Actual station:  {{actualPlay}}</th>
+          <th scope="col" class="text-left">Actual station: {{actualPlay}}</th>
         </tr>
       </thead>
     </table>
 
     <div class="row">
-      <div class="col-6"><button type="submit" name="button" value="Start"
-          class="btn btn-warning btn-block" disabled>Volume: {{volume}}</button></div>
-          <div class="col-6"><select class="btn btn-success btn-block" name=colours method="GET" action="/">
-      {% for radio in radios %}
-      <option value="{{radio}}" SELECTED>{{radio}}</option>"
-      {% endfor %}
-    </select></div>
+      <div class="col-6"><button type="submit" name="button" value="Start" class="btn btn-warning btn-block"
+          disabled>Volume: {{volume}}</button></div>
+      <div class="col-6">
+        <select class="btn btn-success btn-block" name="selectRadio">
+          {% for radio in radios %}
+            {% if selectedItem == radio %}
+              <option value="{{radio}}" selected>{{radio}}</option>"
+            {% else %}
+              <option value="{{radio}}">{{radio}}</option>"
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
     </div>
 
+    {{selectedItem}} 
     <p class="mt-sm-2 mb-sm-4"></p>
 
 
     <div class="row">
       <div class="col-6"><button type="submit" name="button" value="Play"
           class="btn btn-success btn-block">Play</button></div>
-      <div class="col-6"><button type="submit" name="button" value="Stop"
-          class="btn btn-danger btn-block">Stop</button></div>
+      <div class="col-6"><button type="submit" name="button" value="Stop" class="btn btn-danger btn-block">Stop</button>
+      </div>
     </div>
 
     <p class="mt-sm-2 mb-sm-4"></p>
@@ -47,8 +54,8 @@
     <div class="row">
       <div class="col-6"><button type="submit" name="button" value="VolumeUp" class="btn btn-success btn-block">Volume
           Up</button></div>
-      <div class="col-6"><button type="submit" name="button" value="VolumeDown"
-          class="btn btn-success btn-block">Volume Down</button></div>
+      <div class="col-6"><button type="submit" name="button" value="VolumeDown" class="btn btn-success btn-block">Volume
+          Down</button></div>
     </div>
 
     <table class="table t1">
@@ -61,8 +68,8 @@
     </table>
 
     <div class="row">
-      <div class="col-6"><button type="submit" name="button" value="VolumeUpUp"
-          class="btn btn-success btn-block">Volume Up Up</button></div>
+      <div class="col-6"><button type="submit" name="button" value="VolumeUpUp" class="btn btn-success btn-block">Volume
+          Up Up</button></div>
       <div class="col-6"><button type="submit" name="button" value="VolumeDownDown"
           class="btn btn-success btn-block">Volume Down Down</button></div>
     </div>
