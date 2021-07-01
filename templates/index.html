@@ -5,19 +5,18 @@
 <div class="container mt-2 mt-md-5 b1">
   <form method="post">
     <table class="table t1">
-      <thead class="thead-dark">
+      <thead class="bg-info rounded">
         <tr>
           <th scope="col" class="text-left">Select station</th>
         </tr>
       </thead>
     </table>
 
-    <div class="row">
-      <div class="col-6"><button type="submit" name="button" value="Start"
-          class="btn btn-success btn-block">Play</button></div>
-      <div class="col-6"><button type="submit" name="button" value="Pause"
-          class="btn btn-danger btn-block">Stop</button></div>
-    </div>
+    <select name=colours method="GET" action="/">
+      {% for radio in radios %}
+      <option value="{{colour}}" SELECTED>{{radios}}</option>"
+      {% endfor %}
+    </select>
 
     <p class="mt-sm-2 mb-sm-4"></p>
 
@@ -71,6 +70,13 @@
           class="btn btn-success btn-block">Volume Down Down</button></div>
     </div>
   </form>
+</div>
+
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    Dropdown link
+  </a>
 </div>
 
 {% endblock %}
