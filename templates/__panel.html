@@ -4,27 +4,26 @@
 
 
 {% block body %}
-    {% block navbar %} 
+{% block navbar %}
 
 <nav class="navbar navbar-expand-md bg-danger nav-fill" style="color:#DC3545">
-    <ul class="nav justify-content-end">
-      <li class="nav-item active"></li>
-        <i class="fas fa-podcast fa-5x" style="color:white"></i>
-        <h2 style="color:white" >  Raspbian Web Radio</h2>
-      </li>
-    </ul>
+  <ul class="nav justify-content-end">
+    <li class="nav-item active"></li>
+    <i class="fas fa-podcast fa-5x" style="color:white"></i>
+    <h2 style="color:white"> Raspbian Web Radio</h2>
+  </ul>
 </nav>
 
-  {% endblock %}
-    
-      {% block content %}
+{% endblock %}
 
-      {% endblock %}
-    
-      {% block footer %}
-      <footer class="page-footer font-small blue">
-          <div class="footer-copyright text-center py-3">© 2021 Copyright: Paweł Dudczyk </div> 
-      </footer>
-      {% endblock %}  
+{% block content %}
+
+{% endblock %}
+
+{% block footer %}
+<footer class="page-footer font-small blue">
+  <div class="footer-copyright text-center py-3">© 2021 Copyright: Paweł Dudczyk </div>
+</footer>
+{% endblock %}
 
 {% endblock %}
