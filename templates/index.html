@@ -1,0 +1,76 @@
+{% extends "__panel.html" %}
+
+
+{% block content %}
+<div class="container mt-2 mt-md-5 b1">
+  <form method="post">
+    <table class="table t1">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="text-left">Select station</th>
+        </tr>
+      </thead>
+    </table>
+
+    <div class="row">
+      <div class="col-6"><button type="submit" name="button" value="Start"
+          class="btn btn-success btn-block">Play</button></div>
+      <div class="col-6"><button type="submit" name="button" value="Pause"
+          class="btn btn-danger btn-block">Stop</button></div>
+    </div>
+
+    <p class="mt-sm-2 mb-sm-4"></p>
+
+    <table class="table t1">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="text-left">Play Stop</th>
+        </tr>
+      </thead>
+    </table>
+
+    <div class="row">
+      <div class="col-6"><button type="submit" name="button" value="Start"
+          class="btn btn-success btn-block">Play</button></div>
+      <div class="col-6"><button type="submit" name="button" value="Pause"
+          class="btn btn-danger btn-block">Stop</button></div>
+    </div>
+
+    <p class="mt-sm-2 mb-sm-4"></p>
+
+    <table class="table t1">
+      <thead class="thead-dark">
+        <tr>
+          <th class="col-2" scope="col">Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col-6"><button type="submit" name="button" value="Volume Up" class="btn btn-success btn-block">Volume
+          Up</button></div>
+      <div class="col-6"><button type="submit" name="button" value="Volume Down"
+          class="btn btn-success btn-block">Volume Down</button></div>
+    </div>
+
+    <table class="table t1">
+      <thead class="thead-dark">
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col-6"><button type="submit" name="button" value="Volume Up Up"
+          class="btn btn-success btn-block">Volume Up Up</button></div>
+      <div class="col-6"><button type="submit" name="button" value="Volume Down Down"
+          class="btn btn-success btn-block">Volume Down Down</button></div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
