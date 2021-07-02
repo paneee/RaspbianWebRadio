@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
 mpc = Mpc()
- 
+
 
 Bootstrap(app)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
@@ -16,9 +16,10 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
-
+    
     if request.method == "GET":
-        return render_template('index.html', radios=WebRadios, actualVolume=20, actualPlay="Radio Nowy Swiat")
+        select = request.form.get('selectRadio')
+        return render_template('index.html', radios=WebRadios, volume=mpc.getVolume(), actualPlay=select)
 
     if request.method == "POST":
         select = request.form.get('selectRadio')
@@ -36,7 +37,7 @@ def hello():
         if request.form['button'] == 'VolumeDownDown':
             mpc.volumeDownDown()
 
-    return render_template('index.html', radios=WebRadios, actualVolume=20, actualPlay="Radio Nowy Swiat", selectedItem = select)
+        return render_template('index.html', radios=WebRadios, volume=mpc.getVolume(), actualPlay=select, selectedItem=select)
 
 
 app.run(debug=True, port=5000, host='192.168.1.3')
