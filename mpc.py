@@ -1,6 +1,5 @@
 import subprocess
 import re
-import time
 
 class Mpc:
     def mpcCommand(self, cmd):
