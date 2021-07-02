@@ -29,13 +29,13 @@ def hello():
         if request.form['button'] == 'Stop':
             mpc.stop()
         if request.form['button'] == 'VolumeUp':
-            mpc.volumeUp()
+            mpc.volumeChange('+1')
         if request.form['button'] == 'VolumeUpUp':
-            mpc.volumeUpUp()
+            mpc.volumeChange('+10')
         if request.form['button'] == 'VolumeDown':
-            mpc.volumeDown()
+            mpc.volumeChange('-1')
         if request.form['button'] == 'VolumeDownDown':
-            mpc.volumeDownDown()
+            mpc.volumeChange('-10')
 
         return render_template('index.html', radios=WebRadios, volume=mpc.getVolume(), actualPlay=select, selectedItem=select)
 

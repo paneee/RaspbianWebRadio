@@ -7,7 +7,6 @@ class Mpc:
         p = subprocess.Popen(['mpc'] + cmd, stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         r = p.stdout.read()
-        #print(r)
         return r
 
     def play(self, url):
@@ -30,14 +29,5 @@ class Mpc:
         table = re.split(':|%', str(ret))
         return table[1]   
 
-    def volumeDown(self):
-        self.mpcCommand(["volume", "-1"])
-
-    def volumeUp(self):
-        self.mpcCommand(["volume", "+1"])
-
-    def volumeDownDown(self):
-        self.mpcCommand(["volume", "-15"])
-
-    def volumeUpUp(self):
-        self.mpcCommand(["volume", "+15"])
+    def volumeChange(self, arg):
+        self.mpcCommand(["volume", arg])
