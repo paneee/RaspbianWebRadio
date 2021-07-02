@@ -19,9 +19,32 @@ api = Api(app)
 class GetAllStation(Resource):
     def get(self):
         return WebRadios
+
+class GetVolume(Resource):
+    def get(self):
+        return mpc.getVolume()
+
+class SetVolume(Resource):
+    def post(self, value):
+        mpc.volumeChange(value)
+        return mpc.getVolume(), 201
+
+class Play(Resource):
+    def post(self, station):
+        mpc.play(WebRadios[station])
+        return {station,WebRadios[station]}, 201
+
+class Stop(Resource):
+    def post(self):
+        mpc.stop()
+        return "OK", 201
+
         
 api.add_resource(GetAllStation, '/api/getAllStation')
-
+api.add_resource(GetVolume, '/api/getVolume')
+api.add_resource(SetVolume,'/api/setVolume/<value>')
+api.add_resource(Play,'/api/Play/<station>')
+api.add_resource(Stop,'/api/Stop')
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
