@@ -41,4 +41,4 @@ def hello():
 
 
 
-app.run(debug=True, port=5000, host='192.168.1.3')
+app.run(port=5000, host='0.0.0.0')
