@@ -1,11 +1,13 @@
 import subprocess
 
+
 class Mpc:
     def mpcCommand(self, cmd):
-    	p = subprocess.Popen(['mpc'] + cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        # r =  p.stdout.read()
-        # print(r)
-    	return p.stdout.read()
+        p = subprocess.Popen(['mpc'] + cmd, stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        r = p.stdout.read()
+        print(r)
+        return r
 
     def play(self, url):
         self.clear()

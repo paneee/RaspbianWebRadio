@@ -21,8 +21,10 @@ def hello():
         return render_template('index.html', radios=WebRadios, actualVolume=20, actualPlay="Radio Nowy Swiat")
 
     if request.method == "POST":
+        select = request.form.get('selectRadio')
         if request.form['button'] == 'Play':
-            mpc.play('http://radio.weszlo.fm/s7d70a7895/listen')
+            link = WebRadios[select]
+            mpc.play(link)
         if request.form['button'] == 'Stop':
             mpc.stop()
         if request.form['button'] == 'VolumeUp':
@@ -33,10 +35,6 @@ def hello():
             mpc.volumeDown()
         if request.form['button'] == 'VolumeDownDown':
             mpc.volumeDownDown()
-       
-
-    select = request.form.get('selectRadio')
-    print(select)
 
     return render_template('index.html', radios=WebRadios, actualVolume=20, actualPlay="Radio Nowy Swiat", selectedItem = select)
 
