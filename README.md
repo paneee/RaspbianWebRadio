@@ -11,6 +11,12 @@ cd RaspbianWebRadio
 python3 app.py
 ```
 
+## Dependencies
+
+```bash
+flask-bootstrap4
+
+```
 
 ## Usage
 
