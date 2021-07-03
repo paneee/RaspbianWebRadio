@@ -36,23 +36,30 @@ Available commands
 ```bash
 192.168.1.50:5000/api/getAllStation
 ```
+Returns all possible stations.
 
 ```bash
 192.168.1.50:5000/api/getVolume
 ```
+Returns the current volume 
 
 ```bash
 192.168.1.50:5000/api/setVolume/+15
 ```
+Increases the volume by 15%
+To decrease, enter the argument -15 
 
 ```bash
-192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/setVolume/40
 ```
+Sets volume to 40 
 
 ```bash
 192.168.1.50:5000/api/Play/RNS
 ```
+Sets the station being played back to RNS. List of available stations in the file model.py.
 
 ```bash
 192.168.1.50:5000/api/Stop
 ```
+Stops playing a station.
