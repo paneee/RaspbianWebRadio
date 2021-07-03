@@ -35,48 +35,24 @@ Available commands
 
 ```bash
 192.168.1.50:5000/api/getAllStation
-192.168.1.50:5000/api/getVolume
-192.168.1.50:5000/api/setVolume/+15
-192.168.1.50:5000/api/Play/RNS
-192.168.1.50:5000/api/Stop
 ```
 
 ```bash
-192.168.1.50:5000/api/getAllStation
 192.168.1.50:5000/api/getVolume
-192.168.1.50:5000/api/setVolume/+15
-192.168.1.50:5000/api/Play/RNS
-192.168.1.50:5000/api/Stop
 ```
 
 ```bash
-192.168.1.50:5000/api/getAllStation
-192.168.1.50:5000/api/getVolume
 192.168.1.50:5000/api/setVolume/+15
-192.168.1.50:5000/api/Play/RNS
-192.168.1.50:5000/api/Stop
 ```
 
 ```bash
-192.168.1.50:5000/api/getAllStation
-192.168.1.50:5000/api/getVolume
 192.168.1.50:5000/api/setVolume/+15
-192.168.1.50:5000/api/Play/RNS
-192.168.1.50:5000/api/Stop
 ```
 
 ```bash
-192.168.1.50:5000/api/getAllStation
-192.168.1.50:5000/api/getVolume
-192.168.1.50:5000/api/setVolume/+15
 192.168.1.50:5000/api/Play/RNS
-192.168.1.50:5000/api/Stop
 ```
 
 ```bash
-192.168.1.50:5000/api/getAllStation
-192.168.1.50:5000/api/getVolume
-192.168.1.50:5000/api/setVolume/+15
-192.168.1.50:5000/api/Play/RNS
 192.168.1.50:5000/api/Stop
 ```
