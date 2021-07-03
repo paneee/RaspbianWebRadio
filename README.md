@@ -21,15 +21,58 @@ flask_restful
 
 ## Usage
 
+Listenable radio stations are in the model.py file in the WebRadio dictionary variable, you can add more...
 In the example the server runs on a raspberry pi 3. (ip 192.168.1.50 port 5000)
 
 ### Web page
-![2021-07-03_191433](https://user-images.githubusercontent.com/27755739/124362448-252cc300-dc35-11eb-99e7-e34ed6e5ff51.png)
+
+![2021-07-03_191433](https://user-images.githubusercontent.com/27755739/124363168-067cfb00-dc3a-11eb-96bb-debc0d124c9d.png)
 
 
 ### Web API
 
 Available commands
+
+```bash
+192.168.1.50:5000/api/getAllStation
+192.168.1.50:5000/api/getVolume
+192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/Play/RNS
+192.168.1.50:5000/api/Stop
+```
+
+```bash
+192.168.1.50:5000/api/getAllStation
+192.168.1.50:5000/api/getVolume
+192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/Play/RNS
+192.168.1.50:5000/api/Stop
+```
+
+```bash
+192.168.1.50:5000/api/getAllStation
+192.168.1.50:5000/api/getVolume
+192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/Play/RNS
+192.168.1.50:5000/api/Stop
+```
+
+```bash
+192.168.1.50:5000/api/getAllStation
+192.168.1.50:5000/api/getVolume
+192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/Play/RNS
+192.168.1.50:5000/api/Stop
+```
+
+```bash
+192.168.1.50:5000/api/getAllStation
+192.168.1.50:5000/api/getVolume
+192.168.1.50:5000/api/setVolume/+15
+192.168.1.50:5000/api/Play/RNS
+192.168.1.50:5000/api/Stop
+```
+
 ```bash
 192.168.1.50:5000/api/getAllStation
 192.168.1.50:5000/api/getVolume
