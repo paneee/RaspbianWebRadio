@@ -31,7 +31,7 @@ In the example the server runs on a raspberry pi 3. (ip 192.168.1.50 port 5000)
 
 ### Web API
 
-Available commands
+#### Available commands
 
 ```bash
 192.168.1.50:5000/api/getAllStation
@@ -41,18 +41,17 @@ Returns all possible stations.
 ```bash
 192.168.1.50:5000/api/getVolume
 ```
-Returns the current volume 
+Returns the current volume.
 
 ```bash
 192.168.1.50:5000/api/setVolume/+15
 ```
-Increases the volume by 15%
-To decrease, enter the argument -15 
+Increases the volume by 15%. To decrease, enter the argument -15.
 
 ```bash
 192.168.1.50:5000/api/setVolume/40
 ```
-Sets volume to 40 
+Sets volume to 40.
 
 ```bash
 192.168.1.50:5000/api/Play/RNS
