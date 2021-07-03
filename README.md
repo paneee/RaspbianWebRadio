@@ -14,8 +14,9 @@ python3 app.py
 ## Dependencies
 
 ```bash
+flask
 flask-bootstrap4
-
+flask_restful
 ```
 
 ## Usage
