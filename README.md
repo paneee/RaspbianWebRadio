@@ -14,6 +14,8 @@ python3 app.py
 
 ## Usage
 
+In the example the server runs on a raspberry pi 3. (ip 192.168.1.50 port 5000)
+
 ### Web page
 ![2021-07-03_191433](https://user-images.githubusercontent.com/27755739/124362448-252cc300-dc35-11eb-99e7-e34ed6e5ff51.png)
 
