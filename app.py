@@ -21,11 +21,16 @@ api = Api(app)
 
 class GetAllStation2(Resource):
     def get(self):
-        return WebRadioEncoder().encode(WebRadiosList)
+        resp = flask.Response(WebRadioEncoder().encode(WebRadiosList))
+        resp.headers['Content-Type'] = 'application/json; charset=utf-8'
+        resp.headers['Access-Control-Allow-Origin'] = '	*'
+        resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
+        resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
+        return resp
 
 class GetAllStation(Resource):
     def get(self):
-        resp = flask.Response(WebRadioEncoder().encode(WebRadiosList))
+        resp = flask.Response(WebRadioEncoder().encode(WebRadios))
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
@@ -50,7 +55,7 @@ class SetVolume(Resource):
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-        return resp, 201
+        return "OK"
 
 
 class Play(Resource):
@@ -61,8 +66,7 @@ class Play(Resource):
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-        return resp, 201
-        #return {station,WebRadios[station]}, 201
+        return "OK"
 
 
 class Stop(Resource):
@@ -73,7 +77,7 @@ class Stop(Resource):
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-        return resp, 201
+        return "OK"
 
         
 api.add_resource(GetAllStation, '/api/getAllStation')
