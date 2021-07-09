@@ -13,6 +13,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.secret_key = os.urandom(12)
 
 mpc = Mpc()
@@ -22,7 +23,7 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 api = Api(app)
 
-class GetAllStation2(Resource):
+class getAllStation2(Resource):
     def get(self):
         resp = flask.Response(WebRadioEncoder().encode(WebRadiosList))
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -31,7 +32,7 @@ class GetAllStation2(Resource):
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
         return resp
 
-class GetAllStation(Resource):
+class getAllStation(Resource):
     def get(self):
         resp = flask.Response(WebRadioEncoder().encode(WebRadios))
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -40,7 +41,7 @@ class GetAllStation(Resource):
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
         return resp
 
-class GetVolume(Resource):
+class getVolume(Resource):
     def get(self):
         resp = flask.Response(mpc.getVolume())
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -50,49 +51,50 @@ class GetVolume(Resource):
         return resp
 
 
-class SetVolume(Resource):
+class setVolume(Resource):
     def post(self):
         request_data = request.get_json()
         volume = request_data['volume']
         mpc.volumeChange(volume)
-        
         resp = make_response(json.dumps({'volume':mpc.getVolume()}), 200) 
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
         resp.headers['Access-Control-Allow-Origin'] = '*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-
         return resp
 
 
-class Play(Resource):
-    def post(self, station):
-        mpc.play(WebRadios[station])
-        resp = flask.Response("OK")
+class playRadio(Resource):
+    def post(self):
+        request_data = request.get_json()
+        name = request_data['name']
+        url = request_data['url']
+        mpc.play(WebRadios[name])
+        resp = make_response(json.dumps({'name':name, 'url': url}), 200) 
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-        return "OK"
+        return resp
 
 
-class Stop(Resource):
+class stopRadio(Resource):
     def post(self):
         mpc.stop()
-        resp = flask.Response("OK")
+        resp = flask.Response()
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
         resp.headers['Access-Control-Allow-Origin'] = '	*'
         resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS'
         resp.headers['Access-Control-Allow-Headers'] = 'Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With'
-        return "OK"
+        return resp
 
         
-api.add_resource(GetAllStation, '/api/getAllStation')
-api.add_resource(GetAllStation2, '/api/getAllStation2')
-api.add_resource(GetVolume, '/api/getVolume')
-api.add_resource(SetVolume,'/api/setVolume/')
-api.add_resource(Play,'/api/Play/<station>')
-api.add_resource(Stop,'/api/Stop')
+api.add_resource(getAllStation, '/api/getAllStation/')
+api.add_resource(getAllStation2, '/api/getAllStation2/')
+api.add_resource(getVolume, '/api/getVolume/')
+api.add_resource(setVolume,'/api/setVolume/')
+api.add_resource(playRadio,'/api/playRadio/')
+api.add_resource(stopRadio,'/api/stopRadio/')
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -118,7 +120,6 @@ def hello():
             mpc.volumeChange('-10')
 
         return render_template('index.html', radios=WebRadios, volume=mpc.getVolume(), actualPlay=select, selectedItem=select)
-
 
 
 app.run(debug=True,port=8080, host='0.0.0.0')
