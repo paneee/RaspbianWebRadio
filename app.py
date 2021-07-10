@@ -58,24 +58,28 @@ class stopRadio(Resource):
         resp = flask.Response()
         return resp
 
-class getActualStation(Resource):
+class getPlayingStation(Resource):
     def get(self):
-        resp = flask.Response(mpc.getPlayedStation()) 
-        return resp
+        radio = mpc.getActualPlayingStation()
+        if radio != "":
+            resp = make_response(json.dumps({'name':radio.name, 'url': radio.url}), 200)
+            return resp
+        else:
+            return ""
 
 api.add_resource(getAllStation, '/api/getAllStation/')
 api.add_resource(getVolume, '/api/getVolume/')
 api.add_resource(setVolume,'/api/setVolume/')
 api.add_resource(playRadio,'/api/playRadio/')
 api.add_resource(stopRadio,'/api/stopRadio/')
-api.add_resource(getActualStation,'/api/getActualStation/')
+api.add_resource(getPlayingStation,'/api/getPlayingStation/')
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
     
     if request.method == "GET":
         select = request.form.get('selectRadio')
-        return render_template('index.html', radios=WebRadiosList, volume=mpc.getVolume(), actualPlay=mpc.getActualPlayedStation())
+        return render_template('index.html', radios=WebRadiosList, volume=mpc.getVolume(), actualPlay=mpc.getActualPlayingStation())
 
     if request.method == "POST":
         select = request.form.get('selectRadio')
@@ -92,8 +96,7 @@ def hello():
             mpc.volumeChange('-1')
         if request.form['button'] == 'VolumeDownDown':
             mpc.volumeChange('-10')
-        aaaa = mpc.getActualPlayedStation()
-        return render_template('index.html', radios=WebRadiosList, volume=mpc.getVolume(), actualPlay=mpc.getActualPlayedStation(), selectedItem=select)
+        return render_template('index.html', radios=WebRadiosList, volume=mpc.getVolume(), actualPlay=mpc.getActualPlayingStation(), selectedItem=select)
 
 app.run(debug=True,port=5000, host='0.0.0.0')
 

@@ -36,7 +36,7 @@ class Mpc:
     def volumeChange(self, arg):
         self.mpcCommand(["volume", arg])
 
-    def getActualPlayedStation(self):
+    def getActualPlayingStation(self):
         if self.actualPlayedStation is not None:
             return self.actualPlayedStation
         else:
