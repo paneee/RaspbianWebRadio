@@ -1,5 +1,6 @@
 import subprocess
 import re
+from model import WebRadiosList
 
 class Mpc:
     def __init__(self):
@@ -12,14 +13,23 @@ class Mpc:
         return r
 
     def play(self, webRadio):
-        self.actualPlayedStation = webRadio
         self.clear()
         self.addStation(webRadio.url)
         self.mpcCommand(["play"])
+        ret = WebRadiosList
+        for item in ret:
+            item.isPlaying = False
+        for item in ret:
+            if webRadio.name == item.name and webRadio.url == item.url:
+                item.isPlaying = True 
+        return ret
 
     def stop(self):
-        self.actualPlayedStation = None
         self.mpcCommand(["stop"])
+        ret = WebRadiosList
+        for item in ret:
+            item.isPlaying = False
+        return ret
 
     def clear(self):
         self.mpcCommand(["clear"])
@@ -35,9 +45,3 @@ class Mpc:
 
     def volumeChange(self, arg):
         self.mpcCommand(["volume", arg])
-
-    def getActualPlayingStation(self):
-        if self.actualPlayedStation is not None:
-            return self.actualPlayedStation
-        else:
-            return ""

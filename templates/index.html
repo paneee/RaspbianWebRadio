@@ -1,13 +1,16 @@
 {% extends "__panel.html" %}
 
-
 {% block content %}
 <div class="container mt-2 mt-md-5 b1">
   <form method="post">
     <table class="table t1">
       <thead class="bg-info rounded">
         <tr>
-          <th scope="col" class="text-left">Actual station: {{actualPlay.name}}</th>
+            {% if actualPlay == "" %}
+              <th scope="col" class="text-left">Is Stoping</th>
+            {% else %}
+              <th scope="col" class="text-left">Actual station: {{actualPlay.name}}</th>
+            {% endif %}
         </tr>
       </thead>
     </table>
@@ -18,7 +21,7 @@
       <div class="col-6">
         <select class="btn btn-success btn-block" name="selectRadio">
           {% for radio in radios %}
-            {% if selectedItem == radio.name %}
+            {% if radio.isPlaying == True %}
               <option value="{{radio.name}}" selected>{{radio.name}}</option>
             {% else %}
               <option value="{{radio.name}}">{{radio.name}}</option>"
@@ -29,7 +32,6 @@
     </div>
 
     <p class="mt-sm-2 mb-sm-4"></p>
-
 
     <div class="row">
       <div class="col-6"><button type="submit" name="button" value="Play"
