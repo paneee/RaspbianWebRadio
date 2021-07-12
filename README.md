@@ -17,6 +17,7 @@ python3 app.py
 flask
 flask-bootstrap4
 flask_restful
+flask_cors
 ```
 
 ## Usage
