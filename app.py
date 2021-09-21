@@ -117,8 +117,13 @@ def hello():
             _mpc.volumeChange('-10')
         return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume = _mpc.getVolume(), selectedItem=select)
 
-# Start aplication regon 
+
+
+# Start aplication region 
 app.run(debug=True,port=5000, host='192.168.1.50')
+
+
+
 
 
 
