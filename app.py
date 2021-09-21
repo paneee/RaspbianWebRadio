@@ -118,7 +118,7 @@ def hello():
         return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume = _mpc.getVolume(), selectedItem=select)
 
 # Start aplication regon 
-app.run(debug=True,port=5000, host='0.0.0.0')
+app.run(debug=True,port=5000, host='192.168.1.50')
 
 
 
