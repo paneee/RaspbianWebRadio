@@ -19,15 +19,17 @@ class DiscordClient(discord.Client):
             await message.channel.send('pong')
 
         if message.content == 'Volume':
-            await message.channel.send(_mpc.getVolume())
+            #await message.channel.send(_mpc.getVolume())
+            await message.channel.send('_mpc.getVolume()')
 
         if message.content == 'Radios':
-            ret = WebRadioEncoder().encode(_webRadioList)
+            #ret = WebRadioEncoder().encode(_webRadioList)
+            ret = 12
             await message.channel.send(ret)
 
 
 def readDiscordTokenfromFile():
-    with open('token.txt') as f:
+    with open('/home/pi/RaspbianWebRadio/token.txt') as f:
         token = f.readline()
     return token
 

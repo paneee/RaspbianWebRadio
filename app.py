@@ -1,13 +1,15 @@
 import os
 import flask
 import helpers
-from flask import Flask, json, render_template, request
+from flask import Flask, json, render_template, request, redirect, url_for
 from flask_restful import Resource, Api
 from flask.helpers import make_response
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS
 from model import WebRadioEncoder, WebRadiosList
 from mpc import Mpc
+from speaker import Speaker
+
 
 
 # Configuration region
@@ -22,6 +24,9 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 # MPC declaration region
 _mpc = Mpc()
+
+# Speaker declaration region
+_speaker = Speaker()
 
 
 # Actual radios status region
@@ -84,11 +89,31 @@ class getPlayingStation(Resource):
         else:
             return ""
 
+class speakerOnOff(Resource):
+    def post(self):
+        _speaker.OnOff()
+        return 'OK'
+
+class speakerVolumeUP(Resource):
+    def post(self):
+        _speaker.VolumeUP()
+        return 'OK'
+
+class speakerVolumeDOWN(Resource):
+    def post(self):
+        _speaker.VolumeDOWN()
+        return 'OK'
+
+
 api.add_resource(getAllStation, '/api/getAllStation/')
 api.add_resource(getVolume, '/api/getVolume/')
 api.add_resource(setVolume,'/api/setVolume/')
 api.add_resource(playRadio,'/api/playRadio/')
 api.add_resource(stopRadio,'/api/stopRadio/')
+api.add_resource(speakerOnOff,'/api/speakerOnOff/')
+api.add_resource(speakerVolumeUP,'/api/speakerVolumeUP/')
+api.add_resource(speakerVolumeDOWN,'/api/speakerVolumeDOWN/')
+
 
 
 # Web page region
@@ -99,6 +124,7 @@ def hello():
         select = request.form.get('selectRadio')
         
         return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume=_mpc.getVolume())
+        #return redirect(url_for('index.html'), radios = getRadios(), actualPlay = getActualPlaying(), volume=_mpc.getVolume())
 
     if request.method == "POST":
         select = request.form.get('selectRadio')
@@ -115,7 +141,15 @@ def hello():
             _mpc.volumeChange('-1')
         if request.form['button'] == 'VolumeDownDown':
             _mpc.volumeChange('-10')
-        return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume = _mpc.getVolume(), selectedItem=select)
+        if request.form['button'] == 'SpeakerVolumeDown':
+            _speaker.VolumeDOWN()
+        if request.form['button'] == 'SpeakerVolumeUp':
+            _speaker.VolumeUP()
+        if request.form['button'] == 'SpeakerOnOff':
+            _speaker.OnOff()
+
+        return redirect(request.referrer)
+        #return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume = _mpc.getVolume(), selectedItem=select)
 
 
 
