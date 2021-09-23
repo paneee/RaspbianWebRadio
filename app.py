@@ -1,15 +1,14 @@
 import os
 import flask
-import helpers
 from flask import Flask, json, render_template, request, redirect, url_for
 from flask_restful import Resource, Api
 from flask.helpers import make_response
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS
-from model import WebRadioEncoder, WebRadiosList
-from mpc import Mpc
-from speaker import Speaker
 
+from rpi.mpc import Mpc
+from rpi.speaker import Speaker
+from rpi.model import WebRadioEncoder
 
 
 # Configuration region
@@ -25,22 +24,9 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 # MPC declaration region
 _mpc = Mpc()
 
+
 # Speaker declaration region
 _speaker = Speaker()
-
-
-# Actual radios status region
-_radios = WebRadiosList
-
-def getRadios():
-    return _radios
-
-def getActualPlaying():
-    for item in _radios:
-        if item.isPlaying == True:
-            ret = item
-            return item
-    return ""
 
 
 # API region
@@ -48,7 +34,7 @@ api = Api(app)
 
 class getAllStation(Resource):
     def get(self):
-        resp = flask.Response(WebRadioEncoder().encode(_radios))
+        resp = flask.Response(WebRadioEncoder().encode(_mpc.webRadios.getAll()))
         return resp
 
 class getVolume(Resource):
@@ -68,21 +54,21 @@ class playRadio(Resource):
     def post(self):
         request_data = request.get_json()
         name = request_data['name']
-        url = request_data['url']
-        radio = helpers.webRadioFromName(name)
-        _radios = _mpc.play(radio)            
+        url = request_data['url'] 
+        radio = _mpc.webRadios.fromName(name)
+        _mpc.play(radio)
         resp = make_response(json.dumps({'name':name, 'url': url}), 200) 
         return resp
 
 class stopRadio(Resource):
     def post(self):
-        _radios = _mpc.stop()
+        _mpc.stop() 
         resp = flask.Response()
         return resp
 
 class getPlayingStation(Resource):
     def get(self):
-        radio = _mpc.getActualPlayingStation()
+        radio = _mpc.webRadios.getPlaying()
         if radio != "":
             resp = make_response(json.dumps({'name':radio.name, 'url': radio.url}), 200)
             return resp
@@ -104,7 +90,6 @@ class speakerVolumeDOWN(Resource):
         _speaker.VolumeDOWN()
         return 'OK'
 
-
 api.add_resource(getAllStation, '/api/getAllStation/')
 api.add_resource(getVolume, '/api/getVolume/')
 api.add_resource(setVolume,'/api/setVolume/')
@@ -115,7 +100,6 @@ api.add_resource(speakerVolumeUP,'/api/speakerVolumeUP/')
 api.add_resource(speakerVolumeDOWN,'/api/speakerVolumeDOWN/')
 
 
-
 # Web page region
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -123,16 +107,15 @@ def hello():
     if request.method == "GET":
         select = request.form.get('selectRadio')
         
-        return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume=_mpc.getVolume())
-        #return redirect(url_for('index.html'), radios = getRadios(), actualPlay = getActualPlaying(), volume=_mpc.getVolume())
+        return render_template('index.html', radios = _mpc.webRadios.getAll(), actualPlay = _mpc.webRadios.getPlaying(), volume=_mpc.getVolume())
 
     if request.method == "POST":
         select = request.form.get('selectRadio')
         if request.form['button'] == 'Play':
-            radio = helpers.webRadioFromName(select)
-            _radios = _mpc.play(radio)
+            radio = _mpc.webRadios.fromName(select)
+            _mpc.play(radio)
         if request.form['button'] == 'Stop':
-            _radios = _mpc.stop()
+            _mpc.stop()
         if request.form['button'] == 'VolumeUp':
             _mpc.volumeChange('+1')
         if request.form['button'] == 'VolumeUpUp':
@@ -149,8 +132,6 @@ def hello():
             _speaker.OnOff()
 
         return redirect(request.referrer)
-        #return render_template('index.html', radios = getRadios(), actualPlay = getActualPlaying(), volume = _mpc.getVolume(), selectedItem=select)
-
 
 
 # Start aplication region 

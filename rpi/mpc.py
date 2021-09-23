@@ -1,11 +1,14 @@
 import subprocess
 import re
-from model import WebRadiosList
+
+from rpi.model import WebRadios
 
 class Mpc:
     def __init__(self):
        self.actualPlayedStation = None
+       self.webRadios = WebRadios()
 
+    # MPC player command
     def mpcCommand(self, cmd):
         p = subprocess.Popen(['mpc'] + cmd, stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -16,20 +19,11 @@ class Mpc:
         self.clear()
         self.addStation(webRadio.url)
         self.mpcCommand(["play"])
-        ret = WebRadiosList
-        for item in ret:
-            item.isPlaying = False
-        for item in ret:
-            if webRadio.name == item.name and webRadio.url == item.url:
-                item.isPlaying = True 
-        return ret
+        self.webRadios.setPlaying(webRadio)
 
     def stop(self):
         self.mpcCommand(["stop"])
-        ret = WebRadiosList
-        for item in ret:
-            item.isPlaying = False
-        return ret
+        self.webRadios.setStoped()
 
     def clear(self):
         self.mpcCommand(["clear"])
@@ -45,3 +39,4 @@ class Mpc:
 
     def volumeChange(self, arg):
         self.mpcCommand(["volume", arg])
+
