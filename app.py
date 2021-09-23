@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 from rpi.mpc import Mpc
 from rpi.speaker import Speaker
-from rpi.model import WebRadioEncoder
+from rpi.radio import WebRadioEncoder
 
 
 # Configuration region

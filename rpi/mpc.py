@@ -1,7 +1,7 @@
 import subprocess
 import re
 
-from rpi.model import WebRadios
+from rpi.radio import WebRadios
 
 class Mpc:
     def __init__(self):
