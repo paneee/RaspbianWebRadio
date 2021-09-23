@@ -45,8 +45,17 @@ class WebRadios:
             item.isPlaying = False
 
     def fromName(self, radioName):
+        radio = ''
         for item in self.WebRadiosList:
             if item.name == radioName:
                 radio = item
                 return radio
+
+    def existName(self, radioName):
+        ret = False
+        for item in self.WebRadiosList:
+            if item.name == radioName:
+                ret = True
+                return ret
+
 

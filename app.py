@@ -5,6 +5,8 @@ from flask_restful import Resource, Api
 from flask.helpers import make_response
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS
+import discord
+import threading
 
 from rpi.mpc import Mpc
 from rpi.speaker import Speaker
@@ -133,13 +135,84 @@ def hello():
 
         return redirect(request.referrer)
 
+# Discord region
+class DiscordClient(discord.Client):
+    async def on_ready(self):
+        print('Logged on as', self.user)
 
-# Start aplication region 
-app.run(debug=True,port=5000, host='192.168.1.50')
+    async def on_message(self, message):
+        # don't respond to ourselves
+        if message.author == self.user:
+            return
 
+        if str(message.author) == 'panee#9393':
+            if message.content == 'Ping':
+                await message.channel.send('pong')
+            
+            elif message.content == 'Help':
+                comandList = 'Ping\n' + 'Play:\n' +'Radios\n' +  'Playing\n' +'Volume\n'+ 'VolumeUP\n'+ 'VolumeDOWN\n'+ 'SpeakerOnOff\n'+ 'SpeakerVolumeUP\n' +'SpeakerVolumeDOWN\n'
+                await message.channel.send(comandList)
 
+            elif 'Play:' in message.content:
+                table = message.content.split(':') 
+                radio = _mpc.webRadios.fromName(table[1])
+                if radio is None:
+                    await message.channel.send('Radio not exist')
+                else:
+                    _mpc.stop()
+                    _mpc.play(radio)
+                    await message.channel.send('Play ' + radio.name)
+                    
+            elif message.content == 'Radios':
+                listRadios = _mpc.webRadios.getAll()
+                ret = ''
+                for item in listRadios:
+                    ret += str(item.name) + '\n'
+                await message.channel.send(ret)
 
+            elif message.content == 'Playing':
+                radio = _mpc.webRadios.getPlaying()
+                await message.channel.send(radio.name)
 
+            elif message.content == 'Volume':
+                await message.channel.send(_mpc.getVolume())
 
+            elif message.content == 'VolumeUP':
+                _mpc.volumeChange('+10')
+                await message.channel.send(_mpc.getVolume())
+
+            elif message.content == 'VolumeDOWN':
+                _mpc.volumeChange('-10')
+                await message.channel.send(_mpc.getVolume())
+
+            elif message.content == 'SpeakerOnOff':
+                _speaker.OnOff()
+                await message.channel.send('OK')
+
+            elif message.content == 'SpeakerVolumeUP':
+                _speaker.VolumeUP()
+                await message.channel.send('OK')
+
+            elif message.content == 'SpeakerVolumeDOWN':
+                _speaker.VolumeDOWN()
+                await message.channel.send('OK')
+
+            else:
+                await message.channel.send('Command not exist')
+
+            
+
+def readDiscordTokenFromFile():
+    with open('/home/pi/RaspbianWebRadio/rpi/token.txt') as f:
+        token = f.readline()
+    return token
+
+client = DiscordClient()
+
+# Start Flask thread 
+threading.Thread(target=lambda: app.run(host='192.168.1.50', port=5000)).start()
+
+# Start Discord thread 
+threading.Thread(client.run(readDiscordTokenFromFile())).start()
 
 
