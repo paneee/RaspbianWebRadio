@@ -1,9 +1,4 @@
 import discord
-from model import WebRadioEncoder, WebRadiosList
-from mpc import Mpc
-
-_mpc = Mpc()
-_webRadioList = WebRadiosList
 
 # Discord region
 class DiscordClient(discord.Client):
@@ -19,22 +14,22 @@ class DiscordClient(discord.Client):
             await message.channel.send('pong')
 
         if message.content == 'Volume':
-            #await message.channel.send(_mpc.getVolume())
             await message.channel.send('_mpc.getVolume()')
 
         if message.content == 'Radios':
-            #ret = WebRadioEncoder().encode(_webRadioList)
             ret = 12
             await message.channel.send(ret)
 
 
-def readDiscordTokenfromFile():
-    with open('/home/pi/RaspbianWebRadio/token.txt') as f:
+def readDiscordTokenFromFile():
+    with open('/home/pi/RaspbianWebRadio/rpi/token.txt') as f:
         token = f.readline()
     return token
 
 
 client = DiscordClient()
+client.run(readDiscordTokenFromFile())
 
-client.run(readDiscordTokenfromFile())
+
+
 
