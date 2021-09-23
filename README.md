@@ -27,7 +27,7 @@ In the example the server runs on a raspberry pi 3. (ip 192.168.1.50 port 5000)
 
 ### Web page
 
-![2021-07-03_191433](https://user-images.githubusercontent.com/27755739/124363168-067cfb00-dc3a-11eb-96bb-debc0d124c9d.png)
+![2021-09-23_150724](https://user-images.githubusercontent.com/27755739/134512421-616ced2f-4f28-41f9-af02-3ee741de101d.png)
 
 
 ### Web API - Available commands
@@ -52,12 +52,27 @@ Sets volume to 40.
 192.168.1.50:5000/api/setVolume/40
 ```
 
-Sets the station being played back to RNS. List of available stations in the file model.py.
+Sets the station being played back to RNS. List of available stations in the file radio.py.
 ```bash
 192.168.1.50:5000/api/Play/RNS
 ```
 
-Stops playing a station.
+Stop playing a station.
 ```bash
 192.168.1.50:5000/api/Stop
+```
+
+Speaker On / Off.
+```bash
+192.168.1.50:5000/api/speakerOnOff/
+```
+
+Speaker volume UP.
+```bash
+http://192.168.1.50:5000/api/speakerVolumeUP/
+```
+
+Speaker volume DOWN.
+```bash
+http://192.168.1.50:5000/api/speakerVolumeDOWN/
 ```
