@@ -69,10 +69,10 @@ Speaker On / Off.
 
 Speaker volume UP.
 ```bash
-http://192.168.1.50:5000/api/speakerVolumeUP/
+192.168.1.50:5000/api/speakerVolumeUP/
 ```
 
 Speaker volume DOWN.
 ```bash
-http://192.168.1.50:5000/api/speakerVolumeDOWN/
+192.168.1.50:5000/api/speakerVolumeDOWN/
 ```
