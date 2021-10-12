@@ -210,7 +210,7 @@ def readDiscordTokenFromFile():
 client = DiscordClient()
 
 # Start Flask thread 
-threading.Thread(target=lambda: app.run(host='192.168.1.50', port=5000)).start()
+threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000)).start()
 
 # Start Discord thread 
 threading.Thread(client.run(readDiscordTokenFromFile())).start()
