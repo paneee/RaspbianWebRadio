@@ -13,16 +13,16 @@ class WebRadioEncoder(JSONEncoder):
 class WebRadios:
     def __init__(self): 
         self.WebRadiosList = []
-        self.WebRadiosList.append(WebRadio("ChiliZet","https://ch.cdn.eurozet.pl/chi-net.mp3",False))
-        self.WebRadiosList.append(WebRadio("Radio 357","https://n06a-eu.rcs.revma.com/ye5kghkgcm0uv?rj-ttl=5&rj-tok=AAABduJfGVcAbh2i1fQT0iMZcA",False))
-        self.WebRadiosList.append(WebRadio("Radio Nowy Swiat","https://stream.nowyswiat.online/aac",False))
-        self.WebRadiosList.append(WebRadio("Record Chillout","http://radiorecord.hostingradio.ru/chil96.aacp",False))
-        self.WebRadiosList.append(WebRadio("Radio Kampus","http://193.0.98.66:8005/",False))
-        self.WebRadiosList.append(WebRadio("Weszlo FM","http://radio.weszlo.fm/s7d70a7895/listen",False))
-        self.WebRadiosList.append(WebRadio("PR3 Trojka","http://stream3.polskieradio.pl:8904",False))    
-        self.WebRadiosList.append(WebRadio("Radio Kraków", "http://panel.nadaje.com:9160/radiokrakow.aac",False))
-        self.WebRadiosList.append(WebRadio("Radiofonia", "https://rs101-krk-cyfronet.rmfstream.pl/radiofonia",False))
-        self.WebRadiosList.append(WebRadio("TOK FM", 'http://www.tuba.fm/stream.pls?radio=10&mp3=1',False))
+        self.WebRadiosList.append(WebRadio('ChiliZet','https://ch.cdn.eurozet.pl/chi-net.mp3',False))
+        self.WebRadiosList.append(WebRadio('Radio 357','https://n06a-eu.rcs.revma.com/ye5kghkgcm0uv?rj-ttl=5&rj-tok=AAABduJfGVcAbh2i1fQT0iMZcA',False))
+        self.WebRadiosList.append(WebRadio('Radio Nowy Swiat','https://stream.nowyswiat.online/aac',False))
+        self.WebRadiosList.append(WebRadio('Record Chillout','http://radiorecord.hostingradio.ru/chil96.aacp',False))
+        self.WebRadiosList.append(WebRadio('Radio Kampus','http://193.0.98.66:8005/',False))
+        self.WebRadiosList.append(WebRadio('Weszlo FM','http://radio.weszlo.fm/s7d70a7895/listen',False))
+        self.WebRadiosList.append(WebRadio('PR3 Trojka','http://stream3.polskieradio.pl:8904',False))    
+        self.WebRadiosList.append(WebRadio('Radio Kraków', 'http://panel.nadaje.com:9160/radiokrakow.aac',False))
+        self.WebRadiosList.append(WebRadio('Radiofonia', 'https://rs101-krk-cyfronet.rmfstream.pl/radiofonia',False))
+        self.WebRadiosList.append(WebRadio('TOK FM', 'https://radiostream.pl/tuba10-1.mp3',False))
 
     def getAll(self):
         return self.WebRadiosList
