@@ -22,6 +22,7 @@ class WebRadios:
         self.WebRadiosList.append(WebRadio("PR3 Trojka","http://stream3.polskieradio.pl:8904",False))    
         self.WebRadiosList.append(WebRadio("Radio Kraków", "http://panel.nadaje.com:9160/radiokrakow.aac",False))
         self.WebRadiosList.append(WebRadio("Radiofonia", "https://rs101-krk-cyfronet.rmfstream.pl/radiofonia",False))
+        self.WebRadiosList.append(WebRadio("TOK FM", 'http://www.tuba.fm/stream.pls?radio=10&mp3=1',False))
 
     def getAll(self):
         return self.WebRadiosList
