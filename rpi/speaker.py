@@ -7,10 +7,17 @@ Speaker_Vol_UP = LED(23)
 Speaker_Vol_DOWN = LED(24)
 
 class Speaker:
+    def __init__(self):
+        self.Enable = False
+
     def OnOff(self):
         Speaker_ON_OFF.off()
         Speaker_ON_OFF.on()
         sleep(3)
+        if self.Enable:
+            self.Enable = False
+        else:
+            self.Enable = True
         Speaker_ON_OFF.off()
 
     def VolumeUP(self):

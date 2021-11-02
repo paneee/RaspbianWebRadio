@@ -132,6 +132,9 @@ def hello():
             _speaker.VolumeUP()
         if request.form['button'] == 'SpeakerOnOff':
             _speaker.OnOff()
+            if _speaker.Enable:
+                sleep(5)
+                os.system('/home/pi/RaspbianWebRadio/bin/bt_connect.sh')
 
         return redirect(request.referrer)
 
